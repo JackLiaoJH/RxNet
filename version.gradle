@@ -1,0 +1,80 @@
+ext {
+
+    android = [
+            compileSdkVersion: 26,
+            buildToolsVersion: "26.1.0",
+            minSdkVersion    : 15,
+            targetSdkVersion : 26,
+            versionCode      : 1,
+            versionName      : '1.0.0',
+    ]
+
+    libsVersion = [
+            // App dependencies version
+            supportLibraryVersion = "26.1.0",
+
+            retrofitVersion = "2.3.0",
+//            glideVersion = "3.7.0",
+//            loggerVersion = "1.15",
+//            eventbusVersion = "3.0.0",
+            gsonVersion = "2.8.2",
+//            butterknife = "8.8.0",
+            retrofit = "2.3.0",
+            rxjava = "2.1.7",
+            rxjava_android = "2.0.1",
+            rxlifecycle = "2.1.0",
+            rxlifecycle_components = "2.1.0",
+//            dagger_compiler = "2.11",
+//            dagger = "2.11",
+//            greenDao = "3.2.2",
+//            arouter_api = "1.2.2",
+//            arouter_compiler = "1.1.3",
+//            transformations = "2.0.2",
+            rxjava_adapter = "2.3.0",
+            gson_converter = "2.3.0",
+//            scalars_converter = "2.3.0",
+//            rxpermission = "0.9.4",
+//            eventbus = "3.0.0",
+            support_v4 = "26.1.0",
+            okhttp3 = "3.9.1",
+//            multidex="1.0.1"
+    ]
+
+    dependencies = [
+            appcompatV7             : "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion",
+            design                  : "com.android.support:design:$rootProject.supportLibraryVersion",
+            cardview                : "com.android.support:cardview-v7:$rootProject.supportLibraryVersion",
+            palette                 : "com.android.support:palette-v7:$rootProject.supportLibraryVersion",
+            recycleview             : "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion",
+            support_v4              : "com.android.support:support-v4:$rootProject.support_v4",
+            annotations             : "com.android.support:support-annotations:$rootProject.supportLibraryVersion",
+//            eventBus                  : "org.greenrobot:eventbus:$rootProject.eventbus",
+//            glide                     : "com.github.bumptech.glide:glide:$rootProject.glideVersion",
+            gson                    : "com.google.code.gson:gson:$rootProject.gsonVersion",
+//            logger                    : "com.orhanobut:logger:$rootProject.loggerVersion",
+//            butterknife               : "com.jakewharton:butterknife:$rootProject.butterknife",
+//            butterknife_compiler      : "com.jakewharton:butterknife-compiler:$rootProject.butterknife",
+            retrofit                : "com.squareup.retrofit2:retrofit:$rootProject.retrofit",
+            okhttp3                 : "com.squareup.okhttp3:okhttp:$rootProject.okhttp3",
+            okhttp3_logging         : "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3",
+
+
+            retrofit_adapter_rxjava2: "com.squareup.retrofit2:adapter-rxjava2:$rootProject.rxjava_adapter",
+            retrofit_converter_gson : "com.squareup.retrofit2:converter-gson:$rootProject.gson_converter",
+//            retrofit_converter_scalars: "com.squareup.retrofit2:converter-scalars:$rootProject.scalars_converter",
+//            rxpermission              : "com.tbruyelle.rxpermissions2:rxpermissions:$rootProject.rxpermission@aar",
+            rxjava2                 : "io.reactivex.rxjava2:rxjava:$rootProject.rxjava",
+            rxjava2_android         : "io.reactivex.rxjava2:rxandroid:$rootProject.rxjava_android",
+            rxlifecycle2            : "com.trello.rxlifecycle2:rxlifecycle:$rootProject.rxlifecycle",
+            rxlifecycle2_components : "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.rxlifecycle_components",
+//            dagger2_compiler          : "com.google.dagger:dagger-compiler:$rootProject.dagger_compiler",
+//            dagger2                   : "com.google.dagger:dagger:$rootProject.dagger",
+//            greenDao                  : "org.greenrobot:greendao:$rootProject.greenDao",
+//            transformations           : "jp.wasabeef:glide-transformations:$rootProject.transformations",
+//            multidex                  : "com.android.support:multidex:$rootProject.multidex",
+//路由通讯
+//            arouter_api               : "com.alibaba:arouter-api:$rootProject.arouter_api",
+//            arouter_compiler          : "com.alibaba:arouter-compiler:$rootProject.arouter_compiler"
+
+    ]
+}
