@@ -3,6 +3,7 @@ package org.net.rxnet;
 import android.content.Context;
 
 import org.net.rxnet.manager.RxNetManager;
+import org.net.rxnet.request.GetRequest;
 import org.net.rxnet.utils.NullUtils;
 
 /**
@@ -18,33 +19,57 @@ public final class RxNet {
 
     private static RxNetManager.Builder sBuilder;
 
-    private RxNet(Context context) {
+    private static Context mContext;
+
+    private RxNet() {
         sBuilder = new RxNetManager.Builder();
-        sBuilder.setContext(context);
+        sBuilder.setContext(mContext);
+    }
+
+    public static RxNet get() {
+        if (mInstance == null) {
+            synchronized (RxNet.class) {
+                if (mInstance == null) {
+                    mInstance = new RxNet();
+                }
+            }
+        }
+        return mInstance;
     }
 
     public static RxNetManager.Builder init(Context context) {
-        mInstance = new RxNet(context);
+        mContext = context;
+        get();
         return sBuilder;
     }
 
-
-   /* public static RxNet doGet(String url) {
-        checkInstance();
-
-        return mInstance;
-    }*/
-
-    public static RxNet get() {
-        return mInstance;
+    public static Context getContext() {
+        return mContext;
     }
 
-    public static  <T> T create(Class<T> service) {
+    public RxNetManager getRxNetManager() {
+        NullUtils.checkNull(sBuilder);
+        return sBuilder.getRxNetManager();
+    }
+
+    public static <T> T create(Class<T> service) {
         checkInstance();
         return sBuilder.getRxNetManager().getRetrofit().create(service);
     }
 
+    public static GetRequest doGet(String url) {
+        checkInstance();
+        NullUtils.checkNull(url);
+        return (GetRequest) sBuilder.getRxNetManager()
+                .getRequestManager()
+                .createRequest(GetRequest.class)
+                .setUrl(url)
+                ;
+    }
+
+
     private static void checkInstance() {
         NullUtils.checkNull(mInstance, "请在项目中先调用RxNet.init()方法初始化!!!");
     }
+
 }

@@ -34,12 +34,15 @@ public final class RxNetManager {
     private OkHttpClient.Builder mBuilder;
 
     private CacheManager mCacheManager;
+    private RequestManager mRequestManager;
 
     private Retrofit mRetrofit;
 
     RxNetManager(Context context, String baseUrl, Cache cache, int readTimeout,
                  int writeTimeout, int connectTimeout) {
         mCacheManager = new CacheManager(context);
+        mRequestManager= new RequestManager();
+
         mBuilder = new OkHttpClient.Builder();
 
         if (RxNetLog.DEBUG) {
@@ -76,6 +79,10 @@ public final class RxNetManager {
                 .build()
         ;
 
+    }
+
+    public RequestManager getRequestManager() {
+        return mRequestManager;
     }
 
     public Retrofit getRetrofit() {

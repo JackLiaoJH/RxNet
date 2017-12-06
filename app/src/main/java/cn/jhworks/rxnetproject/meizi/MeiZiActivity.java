@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import org.net.rxnet.RxNet;
+import org.net.rxnet.callback.CallBack;
 import org.net.rxnet.utils.RxNetLog;
 
 import java.util.List;
@@ -59,27 +61,42 @@ public class MeiZiActivity extends AppCompatActivity {
                     }
                 });*/
 
+        RxNet.doGet("/api/data/福利/10/1")
+                .param("", "")
+                .headers("Cache-Control", "public, max-age=86400")
+                .execute(new CallBack<BasicResult<List<MeiZi>>>() {
 
-        RxNet.create(DemoService.class).getMeiZi()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<BasicResult<List<MeiZi>>>() {
                     @Override
-                    public void onNext(BasicResult<List<MeiZi>> listBasicResult) {
-                        RxNetLog.d("onNext:%s", listBasicResult.toString());
+                    public void onSuccess(BasicResult<List<MeiZi>> data) {
+                        Log.e("liao", data.toString());
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        RxNetLog.d("onError:%s", e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        RxNetLog.d("onComplete.....");
+                    public void onFail(String errorStr) {
+                        Log.e("liao", "错误:" + errorStr);
                     }
                 });
 
+//
+//        RxNet.create(DemoService.class).getMeiZi()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new DisposableObserver<BasicResult<List<MeiZi>>>() {
+//                    @Override
+//                    public void onNext(BasicResult<List<MeiZi>> listBasicResult) {
+//                        RxNetLog.d("onNext:%s", listBasicResult.toString());
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        RxNetLog.d("onError:%s", e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        RxNetLog.d("onComplete.....");
+//                    }
+//                });
 
 
     }
