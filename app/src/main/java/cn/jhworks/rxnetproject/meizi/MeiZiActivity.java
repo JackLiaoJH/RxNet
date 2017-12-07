@@ -4,23 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import org.net.rxnet.RxNet;
-import org.net.rxnet.callback.CallBack;
 import org.net.rxnet.utils.RxNetLog;
 
 import java.util.List;
 
+import cn.jhworks.lib_common.base.AbstractMvpActivity;
+import cn.jhworks.lib_common.base.factory.CreatePresenter;
 import cn.jhworks.rxnetproject.R;
-import cn.jhworks.rxnetproject.module.BasicResult;
 import cn.jhworks.rxnetproject.module.MeiZi;
-import cn.jhworks.rxnetproject.service.DemoService;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * <p> </p>
@@ -28,7 +22,9 @@ import io.reactivex.schedulers.Schedulers;
  * @author jiahui
  * @date 2017/12/4
  */
-public class MeiZiActivity extends AppCompatActivity {
+@CreatePresenter(MeiziPresenter.class)
+public class MeiZiActivity extends AbstractMvpActivity<MeiziView, MeiziPresenter>
+        implements MeiziView {
     private RecyclerView mRecyclerView;
 
     public static void start(Context context) {
@@ -61,7 +57,7 @@ public class MeiZiActivity extends AppCompatActivity {
                     }
                 });*/
 
-        RxNet.doGet("/api/data/福利/10/1")
+ /*       RxNet.doGet("/api/data/福利/10/1")
                 .param("", "")
                 .headers("Cache-Control", "public, max-age=86400")
                 .execute(new CallBack<BasicResult<List<MeiZi>>>() {
@@ -75,7 +71,7 @@ public class MeiZiActivity extends AppCompatActivity {
                     public void onFail(String errorStr) {
                         Log.e("liao", "错误:" + errorStr);
                     }
-                });
+                });*/
 
 //
 //        RxNet.create(DemoService.class).getMeiZi()
@@ -99,5 +95,39 @@ public class MeiZiActivity extends AppCompatActivity {
 //                });
 
 
+        //设置自己的Presentre工厂，如果你想要自定义的话
+        //        setPresenterFactory(xxxx);
+        if (savedInstanceState != null) {
+            Log.e(TAG, "MainActivity onCreate 测试 = " + savedInstanceState.getString("test"));
+        }
+
+        request();
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("test", "测试保存");
+    }
+
+    @Override
+    public void request() {
+        getMvpPresenter().requestMeizi();
+    }
+
+    @Override
+    public void showLoading() {
+        RxNetLog.i("请求中，请稍后...");
+    }
+
+    @Override
+    public void resultSuccess(List<MeiZi> meiZiList) {
+        RxNetLog.i("请求结果:" + meiZiList.toString());
+    }
+
+    @Override
+    public void resultFail(String errorStr) {
+        RxNetLog.i("请求结果失败..." + errorStr);
     }
 }

@@ -1,1 +1,1 @@
-include ':app', ':rxnet'
+include ':app', ':rxnet', ':lib_common'
