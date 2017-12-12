@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-//    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -12,22 +12,17 @@ android {
 
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile(rootProject.ext.dependencies.appcompatV7) {
-//        exclude module: "support-v4"
-        exclude module: "support-annotations"
-    }
+//    compile(rootProject.ext.dependencies.appcompatV7) {
+////        exclude module: "support-v4"
+//        exclude module: "support-annotations"
+//    }
+
+    compile  rootProject.ext.dependencies.appcompatV7
 
     compile rootProject.ext.dependencies.rxjava2
     compile(rootProject.ext.dependencies.rxjava2_android) {

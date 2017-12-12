@@ -5,11 +5,19 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.net.rxnet.https.HttpsUtils;
+import org.net.rxnet.interceptor.HeaderInterceptor;
+import org.net.rxnet.interceptor.ParamsInterceptor;
+import org.net.rxnet.model.HttpHeaders;
+import org.net.rxnet.model.HttpParams;
 import org.net.rxnet.utils.RxNetLog;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -34,14 +42,13 @@ public final class RxNetManager {
     private OkHttpClient.Builder mBuilder;
 
     private CacheManager mCacheManager;
-    private RequestManager mRequestManager;
 
     private Retrofit mRetrofit;
 
     RxNetManager(Context context, String baseUrl, Cache cache, int readTimeout,
-                 int writeTimeout, int connectTimeout) {
+                 int writeTimeout, int connectTimeout, HttpHeaders httpHeaders
+            , HttpParams httpParams, HttpsUtils.SSLParams sslParams, HostnameVerifier hostnameVerifier) {
         mCacheManager = new CacheManager(context);
-        mRequestManager= new RequestManager();
 
         mBuilder = new OkHttpClient.Builder();
 
@@ -65,9 +72,18 @@ public final class RxNetManager {
         mBuilder.readTimeout(readTimeout > 0 ? readTimeout : DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(writeTimeout > 0 ? writeTimeout : DEFAULT_WRITE_TIME_OUT, TimeUnit.SECONDS)
                 .connectTimeout(connectTimeout > 0 ? connectTimeout : DEFAULT_CONNECT_TIME_OUT, TimeUnit.SECONDS)
+                .addInterceptor(new HeaderInterceptor(httpHeaders))
+                .addInterceptor(new ParamsInterceptor(httpParams))
                 .addNetworkInterceptor(mCacheManager.getHttpCacheInterceptor())
                 .cache(cache != null ? cache : mCacheManager.getCache())
         ;
+        //https 支持
+        if (sslParams != null) {
+            mBuilder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
+        }
+        if (hostnameVerifier != null) {
+            mBuilder.hostnameVerifier(hostnameVerifier);
+        }
         mOkHttpClient = mBuilder.build();
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").serializeNulls().create();
@@ -81,9 +97,6 @@ public final class RxNetManager {
 
     }
 
-    public RequestManager getRequestManager() {
-        return mRequestManager;
-    }
 
     public Retrofit getRetrofit() {
         return mRetrofit;
@@ -97,6 +110,11 @@ public final class RxNetManager {
         private int readTimeout;
         private int writeTimeout;
         private int connectTimeout;
+
+        private HttpHeaders mHttpHeaders;
+        private HttpParams mHttpParams;
+        private HttpsUtils.SSLParams sslParams;
+        private HostnameVerifier hostnameVerifier;
 
         private RxNetManager mRxNetManager;
 
@@ -135,8 +153,44 @@ public final class RxNetManager {
             return this;
         }
 
+        public Builder setHttpHeaders(HttpHeaders httpHeaders) {
+            mHttpHeaders = httpHeaders;
+            return this;
+        }
+
+        public Builder setHttpParams(HttpParams httpParams) {
+            mHttpParams = httpParams;
+            return this;
+        }
+
+        /**
+         * https的全局自签名证书
+         */
+        public Builder certificates(InputStream... certificates) {
+            this.sslParams = HttpsUtils.getSslSocketFactory(null, null, certificates);
+            return this;
+        }
+
+        /**
+         * https双向认证证书
+         */
+        public Builder certificates(InputStream bksFile, String password, InputStream... certificates) {
+            this.sslParams = HttpsUtils.getSslSocketFactory(bksFile, password, certificates);
+            return this;
+        }
+
+        /**
+         * https的全局访问规则
+         */
+        public Builder hostnameVerifier(HostnameVerifier hostnameVerifier) {
+            this.hostnameVerifier = hostnameVerifier;
+            return this;
+        }
+
+
         public void build() {
-            mRxNetManager = new RxNetManager(mContext, baseUrl, mCache, readTimeout, writeTimeout, connectTimeout);
+            mRxNetManager = new RxNetManager(mContext, baseUrl, mCache, readTimeout, writeTimeout,
+                    connectTimeout, mHttpHeaders, mHttpParams, sslParams, hostnameVerifier);
         }
 
         public RxNetManager getRxNetManager() {

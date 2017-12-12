@@ -26,7 +26,7 @@ public class HeaderInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
-        if (mHttpHeaders.isEmpty()) {
+        if (mHttpHeaders == null || mHttpHeaders.isEmpty()) {
             return chain.proceed(builder.build());
         }
         for (Map.Entry<String, String> entry : mHttpHeaders.headersMap.entrySet()) {
