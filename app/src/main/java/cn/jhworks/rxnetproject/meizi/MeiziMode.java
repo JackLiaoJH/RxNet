@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MeiziMode {
 
     public void request(DisposableObserver<BasicResult<List<MeiZi>>> observer) {
-        RxNet.create(DemoService.class).getMeiZi()
+        RxNet.create(DemoService.class).getMeiZi(1, "测试")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

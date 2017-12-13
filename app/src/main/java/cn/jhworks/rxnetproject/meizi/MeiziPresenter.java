@@ -7,6 +7,8 @@ import android.util.Log;
 import java.util.List;
 
 import cn.jhworks.lib_common.base.AbstractMvpPresenter;
+import cn.jhworks.lib_common.event.RxBus;
+import cn.jhworks.lib_common.event.RxBusHelper;
 import cn.jhworks.rxnetproject.module.BasicResult;
 import cn.jhworks.rxnetproject.module.MeiZi;
 import io.reactivex.observers.DisposableObserver;
@@ -34,6 +36,7 @@ public class MeiziPresenter extends AbstractMvpPresenter<MeiziView> {
                 if (getMvpView() != null) {
                     getMvpView().resultSuccess(listBasicResult.results);
                 }
+                RxBusHelper.post(new MeiZiEvent(listBasicResult.results));
             }
 
             @Override

@@ -8,6 +8,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -19,6 +20,6 @@ import retrofit2.http.Query;
 public interface DemoService {
 
     @Headers("Cache-Control: public, max-age=86400")
-    @GET("/api/data/福利/10/1")
-    Observable<BasicResult<List<MeiZi>>> getMeiZi();
+    @GET("/api/data/福利/10/{id}")
+    Observable<BasicResult<List<MeiZi>>> getMeiZi(@Path("id") int id, @Query("test") String test);
 }

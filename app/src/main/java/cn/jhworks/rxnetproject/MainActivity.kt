@@ -4,8 +4,14 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import cn.jhworks.lib_common.event.RxBusHelper
 import cn.jhworks.rxnetproject.meizi.MeiZiActivity
+import cn.jhworks.rxnetproject.meizi.MeiZiEvent
+import cn.jhworks.rxnetproject.module.BasicResult
+import cn.jhworks.rxnetproject.module.MeiZi
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main.*
+import org.net.rxnet.utils.RxNetLog
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +31,12 @@ class MainActivity : AppCompatActivity() {
             MeiZiActivity.start(this)
 
         }
+
+        RxBusHelper.doOnMainThread(MeiZiEvent().javaClass,
+                { res ->
+                    if (res?.mMeiZiList != null)
+                        RxNetLog.i("主页获取数据:%s", res.mMeiZiList)
+                })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

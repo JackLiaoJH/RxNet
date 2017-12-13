@@ -3,7 +3,6 @@ package org.net.rxnet;
 import android.content.Context;
 
 import org.net.rxnet.manager.RxNetManager;
-import org.net.rxnet.request.GetRequest;
 import org.net.rxnet.utils.NullUtils;
 
 /**
@@ -47,24 +46,14 @@ public final class RxNet {
         return mContext;
     }
 
-    public RxNetManager getRxNetManager() {
+   /* public RxNetManager getRxNetManager() {
         NullUtils.checkNull(sBuilder);
         return sBuilder.getRxNetManager();
-    }
+    }*/
 
     public static <T> T create(Class<T> service) {
         checkInstance();
         return sBuilder.getRxNetManager().getRetrofit().create(service);
-    }
-
-    public static GetRequest doGet(String url) {
-        checkInstance();
-        NullUtils.checkNull(url);
-        return (GetRequest) sBuilder.getRxNetManager()
-                .getRequestManager()
-                .createRequest(GetRequest.class)
-                .setUrl(url)
-                ;
     }
 
 

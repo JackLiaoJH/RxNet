@@ -37,64 +37,6 @@ public class MeiZiActivity extends AbstractMvpActivity<MeiziView, MeiziPresenter
         setContentView(R.layout.activity_meizi);
         mRecyclerView = findViewById(R.id.recycler_view);
 
-      /*  RxNet.create(DemoService.class).getMeiZi()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSubscriber<BasicResult<List<MeiZi>>>() {
-                    @Override
-                    public void onNext(BasicResult<List<MeiZi>> listBasicResult) {
-                        RxNetLog.d("onNext:%s", listBasicResult.toString());
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        RxNetLog.d("onError:%s", t.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        RxNetLog.d("onComplete.....");
-                    }
-                });*/
-
- /*       RxNet.doGet("/api/data/福利/10/1")
-                .param("", "")
-                .headers("Cache-Control", "public, max-age=86400")
-                .execute(new CallBack<BasicResult<List<MeiZi>>>() {
-
-                    @Override
-                    public void onSuccess(BasicResult<List<MeiZi>> data) {
-                        Log.e("liao", data.toString());
-                    }
-
-                    @Override
-                    public void onFail(String errorStr) {
-                        Log.e("liao", "错误:" + errorStr);
-                    }
-                });*/
-
-//
-//        RxNet.create(DemoService.class).getMeiZi()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new DisposableObserver<BasicResult<List<MeiZi>>>() {
-//                    @Override
-//                    public void onNext(BasicResult<List<MeiZi>> listBasicResult) {
-//                        RxNetLog.d("onNext:%s", listBasicResult.toString());
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        RxNetLog.d("onError:%s", e.getMessage());
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//                        RxNetLog.d("onComplete.....");
-//                    }
-//                });
-
-
         //设置自己的Presentre工厂，如果你想要自定义的话
         //        setPresenterFactory(xxxx);
         if (savedInstanceState != null) {

@@ -29,7 +29,7 @@ public class HttpCacheInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        if (RxNetWorkUtils.isAvailable(mContext)) {
+        if (!RxNetWorkUtils.isAvailable(mContext)) {
             request = request.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)
                     .build();
