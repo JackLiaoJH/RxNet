@@ -13,7 +13,7 @@ import okhttp3.Cache;
  * <p> 网络请求缓存管理</p>
  *
  * @author jiahui
- * @date 2017/12/4
+ * date 2017/12/4
  */
 
 final class CacheManager {

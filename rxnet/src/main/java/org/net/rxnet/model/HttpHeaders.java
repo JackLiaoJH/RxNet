@@ -22,7 +22,7 @@ import java.util.TimeZone;
  * <p> http头部 实体封装</p>
  *
  * @author jiahui
- * @date 2017/12/7
+ * date 2017/12/7
  */
 public class HttpHeaders {
     public static final String FORMAT_HTTP_DATA = "EEE, dd MMM y HH:mm:ss 'GMT'";
@@ -169,9 +169,6 @@ public class HttpHeaders {
         acceptLanguage = language;
     }
 
-    /**
-     * Accept-Language: zh-CN,zh;q=0.8
-     */
     public static String getAcceptLanguage() {
         if (TextUtils.isEmpty(acceptLanguage)) {
             Locale locale = Locale.getDefault();
@@ -191,9 +188,7 @@ public class HttpHeaders {
         userAgent = agent;
     }
 
-    /**
-     * User-Agent: Mozilla/5.0 (Linux; U; Android 5.0.2; zh-cn; Redmi Note 3 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36
-     */
+
     public static String getUserAgent() {
         if (TextUtils.isEmpty(userAgent)) {
             String webUserAgent = null;

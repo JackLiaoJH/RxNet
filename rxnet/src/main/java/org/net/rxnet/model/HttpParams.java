@@ -12,7 +12,7 @@ import okhttp3.MediaType;
  * <p> http请求参数 实体封装</p>
  *
  * @author jiahui
- * @date 2017/12/7
+ * date 2017/12/7
  */
 public class HttpParams {
     /**

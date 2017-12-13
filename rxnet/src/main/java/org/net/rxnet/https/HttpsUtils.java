@@ -25,7 +25,7 @@ import javax.net.ssl.X509TrustManager;
  * <p> Https工具类 （签名，自签名信息设置）</p>
  *
  * @author jiahui
- * @date 2017/12/4
+ * date 2017/12/4
  */
 public class HttpsUtils {
 

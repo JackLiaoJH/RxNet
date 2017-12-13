@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RxNetProject.iml" filepath="$PROJECT_DIR$/RxNetProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RxNet.iml" filepath="$PROJECT_DIR$/RxNet.iml" />
+      <module fileurl="file://F:\workspace\RxNet\RxNetProject.iml" filepath="F:\workspace\RxNet\RxNetProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/lib_common/lib_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxnet/rxnet.iml" filepath="$PROJECT_DIR$/rxnet/rxnet.iml" />

@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
  * <p> 网络判断工具类</p>
  *
  * @author jiahui
- * @date 2017/12/4
+ * date 2017/12/4
  */
 public class RxNetWorkUtils {
     /**

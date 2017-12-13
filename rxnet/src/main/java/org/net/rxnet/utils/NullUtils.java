@@ -1,10 +1,10 @@
 package org.net.rxnet.utils;
 
 /**
- * <p> </p>
+ * <p>对象为null的判断 </p>
  *
  * @author jiahui
- * @date 2017/12/4
+ * date 2017/12/4
  */
 public class NullUtils {
     public static void checkNull(Object o) {

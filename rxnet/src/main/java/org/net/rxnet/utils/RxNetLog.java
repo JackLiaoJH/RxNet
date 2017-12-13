@@ -6,7 +6,7 @@ import android.util.Log;
  * <p> 网络日志</p>
  *
  * @author jiahui
- * @date 2017/12/4
+ * date 2017/12/4
  */
 public class RxNetLog {
     public static final String TAG = "RxNet_LOG";

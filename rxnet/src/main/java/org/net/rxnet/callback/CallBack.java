@@ -4,7 +4,7 @@ package org.net.rxnet.callback;
  * <p> 网络请求回调</p>
  *
  * @author jiahui
- * @date 2017/12/6
+ * date 2017/12/6
  */
 public interface CallBack<T> {
     /**

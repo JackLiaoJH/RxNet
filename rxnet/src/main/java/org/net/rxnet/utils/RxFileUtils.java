@@ -9,7 +9,7 @@ import java.io.File;
  * <p> 网络文件工具类</p>
  *
  * @author jiahui
- * @date 2017/12/4
+ * date 2017/12/4
  */
 
 public class RxFileUtils {
@@ -18,7 +18,7 @@ public class RxFileUtils {
      * 获取缓存目录，有限获取/sdcard/Android/data/package_name/cache，失败才获取/data/data/com.android.framework/cache
      *
      * @param context
-     * @return
+     * @return 返回缓存路径
      */
     public static String getCacheDir(Context context) {
         // /data/data/com.android.framework/cache

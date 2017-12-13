@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -12,6 +13,17 @@ android {
 
     }
 
+}
+
+//添加
+publish {
+    userOrg = 'jiahui'//bintray.com用户名
+    repoName = 'jiahui'//要传到的maven的名字。你可能有多个maven，要传哪个写哪个。
+    groupId = 'org.net.rxnet'//jcenter上的路径
+    artifactId = 'RxNet'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Retrofit2，RxJava，Okhttp3简单封装，快速开发项目!'//描述，不重要
+    website = 'https://github.com/JackLiaoJH'//网站，不重要
 }
 
 dependencies {

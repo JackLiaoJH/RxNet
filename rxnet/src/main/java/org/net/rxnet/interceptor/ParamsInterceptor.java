@@ -14,7 +14,7 @@ import okhttp3.Response;
  * <p> 公参拦截器</p>
  *
  * @author jiahui
- * @date 2017/12/13
+ * date 2017/12/13
  */
 public class ParamsInterceptor implements Interceptor {
     private HttpParams mHttpParams;

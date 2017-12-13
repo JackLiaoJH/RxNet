@@ -30,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * <p> RxNet 管理类 </p>
  *
  * @author jiahui
- * @date 2017/12/4
+ * date 2017/12/4
  */
 
 public final class RxNetManager {
@@ -165,6 +165,9 @@ public final class RxNetManager {
 
         /**
          * https的全局自签名证书
+         *
+         * @param certificates
+         * @return
          */
         public Builder certificates(InputStream... certificates) {
             this.sslParams = HttpsUtils.getSslSocketFactory(null, null, certificates);
@@ -173,14 +176,23 @@ public final class RxNetManager {
 
         /**
          * https双向认证证书
+         *
+         * @param bksFile
+         * @param password
+         * @param certificates
+         * @return
          */
         public Builder certificates(InputStream bksFile, String password, InputStream... certificates) {
             this.sslParams = HttpsUtils.getSslSocketFactory(bksFile, password, certificates);
             return this;
         }
 
+
         /**
          * https的全局访问规则
+         *
+         * @param hostnameVerifier
+         * @return
          */
         public Builder hostnameVerifier(HostnameVerifier hostnameVerifier) {
             this.hostnameVerifier = hostnameVerifier;

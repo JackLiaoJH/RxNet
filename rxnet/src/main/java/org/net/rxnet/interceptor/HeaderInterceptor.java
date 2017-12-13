@@ -13,7 +13,7 @@ import okhttp3.Response;
  * <p> 添加头部参数 </p>
  *
  * @author jiahui
- * @date 2017/12/7
+ * date 2017/12/7
  */
 public class HeaderInterceptor implements Interceptor {
 
