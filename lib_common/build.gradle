@@ -19,6 +19,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile  rootProject.ext.dependencies.appcompatV7
     compile 'org.net.rxnet:RxNet:1.0.0'
 //    compile project(':rxnet')
 }

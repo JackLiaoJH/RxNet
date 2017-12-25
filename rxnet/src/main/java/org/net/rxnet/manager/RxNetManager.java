@@ -13,8 +13,6 @@ import org.net.rxnet.model.HttpParams;
 import org.net.rxnet.utils.RxNetLog;
 
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
@@ -30,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * <p> RxNet 管理类 </p>
  *
  * @author jiahui
- * date 2017/12/4
+ *         date 2017/12/4
  */
 
 public final class RxNetManager {
@@ -56,13 +54,7 @@ public final class RxNetManager {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(String message) {
-                    try {
-                        String text = URLDecoder.decode(message, "utf-8");
-                        RxNetLog.d("OKHttp-------%s", text);
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                        RxNetLog.d("OKHttp-------%s", message);
-                    }
+                    RxNetLog.d("OKHttp-------%s", message);
                 }
             });
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
